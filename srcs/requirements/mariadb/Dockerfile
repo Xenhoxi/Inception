@@ -8,5 +8,4 @@ COPY tools/db_setup.sh /db_setup.sh
 
 EXPOSE 3306
 
-#CMD ["etc/init.d/maridb start"]
-#CMD ["db_setup.sh"]
+ENTRYPOINT ["./db_setup.sh"]
