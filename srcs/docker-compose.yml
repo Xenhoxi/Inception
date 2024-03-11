@@ -1,6 +1,9 @@
 version: '3'
 services:
   nginx:
+    networks:
+      - inception
+    container_name: nginx
     build:
       context: ./
       dockerfile: ./requirements/nginx/Dockerfile
@@ -8,10 +11,31 @@ services:
       - "443:443"
     restart: always
   mariadb:
+    networks:
+      - inception
+    container_name: mariadb
     env_file:
-      ./.env
+      .env
     build:
       context: ./
       dockerfile: ./requirements/mariadb/Dockerfile
-    ports:
-      - "3306" 
+    expose:
+      - "3306"
+    restart: always
+  wordpress:
+    networks:
+        - inception
+    container_name: wordpress
+    env_file:
+      .env
+    build:
+      context: ./
+      dockerfile: ./requirements/wordpress/Dockerfile
+    depends_on:
+      - mariadb
+    restart: always
+    expose:
+      - "9000"
+networks:
+  inception:
+    driver: bridge
