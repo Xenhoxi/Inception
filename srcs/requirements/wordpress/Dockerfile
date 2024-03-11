@@ -11,10 +11,10 @@ RUN cd /var/www && tar -xzf wordpress-6.4.3-fr_FR.tar.gz && rm wordpress-6.4.3-f
 RUN chown -R root:root /var/www/wordpress
 RUN mkdir -p /run/php
 
-COPY "requirements/wordpress/conf/php.ini" "etc/php/7.4/fpm/php.ini"
+COPY "requirements/wordpress/tools/script.sh" "var/www/wordpress"
+COPY "requirements/wordpress/conf/www.conf" "etc/php/7.4/fpm/pool.d/www.conf"
 
 EXPOSE 9000/tcp
 
+CMD ./var/www/wordpress/script.sh
 CMD /usr/sbin/php-fpm7.4 -F
-
-
