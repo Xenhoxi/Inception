@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   nginx:
     networks:
       - inception
@@ -14,6 +15,7 @@ services:
     depends_on:
       - wordpress
     restart: always
+
   mariadb:
     networks:
       - inception
@@ -25,7 +27,10 @@ services:
       dockerfile: ./requirements/mariadb/Dockerfile
     expose:
       - "3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
     restart: always
+
   wordpress:
     networks:
         - inception
@@ -42,6 +47,7 @@ services:
     restart: always
     expose:
       - "9000"
+
 networks:
   inception:
     driver: bridge
@@ -51,4 +57,10 @@ volumes:
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/home/ljerinec/dataInception'
+      device: '/home/ljerinec/dataInception/wordpress'
+  mariadb_data:
+    driver: local
+    driver_opts:
+      o: 'bind'
+      type: 'none'
+      device: '/home/ljerinec/dataInception/mariadb'
