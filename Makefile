@@ -19,8 +19,9 @@ clean: down
 	mkdir ../dataInception
 	mkdir ../dataInception/mariadb
 	mkdir ../dataInception/wordpress
+	sudo docker volume rm srcs_mariadb_data srcs_wp_data
 
 fclean:
 	sudo docker system prune -a -f
 
-re: down clean up logs
+re: clean up
