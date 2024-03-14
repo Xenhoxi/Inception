@@ -57,10 +57,10 @@ volumes:
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/home/ljerinec/dataInception/wordpress'
+      device: '/home/ljerinec/data/wordpress'
   mariadb_data:
     driver: local
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/home/ljerinec/dataInception/mariadb'
+      device: '/home/ljerinec/data/mariadb'
