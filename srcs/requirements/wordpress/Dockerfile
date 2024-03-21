@@ -20,4 +20,4 @@ RUN mkdir -p /run/php
 
 EXPOSE 9000/tcp
 
-CMD ./script.sh && /usr/sbin/php-fpm7.4 -Fs
+CMD ./script.sh && /usr/sbin/php-fpm7.4 -F
